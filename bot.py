@@ -5,6 +5,9 @@ import os
 
 TOKEN = os.environ.get("BOT_TOKEN")
 
+if not TOKEN:
+    raise ValueError("Переменная окружения BOT_TOKEN не установлена!")
+    
 REMINDER_MESSAGE = """Продержишься дольше?
 ➡ https://1wbfqv.life/v3/2451/rocket-queen?p=2u70
 
