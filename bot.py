@@ -23,7 +23,7 @@ message_text = (
 )
 
 # URL на видеофайл на GitHub (если оно публичное)
-video_url = "https://github.com/manilong/tgbot/blob/main/video.MP4"  # замените
+video_url = "https://raw.githubusercontent.com/manilong/tgbot/blob/main/video.MP4"  # замените
 
 # Обработчик команды /start
 def start(update, context):
