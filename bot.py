@@ -1,6 +1,5 @@
 import os
 from telegram.ext import Updater, CommandHandler
-from telegram import InputMediaVideo
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,44 +13,40 @@ if not TOKEN:
 if not CHAT_ID:
     raise ValueError("Переменная окружения CHAT_ID не установлена!")
 
-# Текст сообщения
 message_text = (
     "Продержишься дольше?\n"
     "➡ https://1wbfqv.life/v3/2451/rocket-queen?p=2u70\n\n"
-    "5к на карту тому, кто продержится дольше, скрины кидать сюда: \n"
+    "5к на карту тому, кто продержится дольше, скрины кидать сюда:\n"
     "https://t.me/+C1wUvbv1V7I1NWQy (в описании мой контакт)"
 )
 
-# URL на видеофайл на GitHub (если оно публичное)
-video_url = "https://raw.githubusercontent.com/manilong/tgbot/blob/main/video.MP4"  # замените
+video_url = "https://raw.githubusercontent.com/manilong/tgbot/main/video.MP4"
 
-# Обработчик команды /start
 def start(update, context):
     context.bot.send_video(
         chat_id=update.effective_chat.id,
         video=video_url,
-        caption=message_text,
-        parse_mode='HTML'
+        caption=message_text
     )
 
 def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
+    # Команда /start
     dp.add_handler(CommandHandler("start", start))
 
+    # Сначала начинаем получать апдейты
     updater.start_polling()
 
-    # Отправка сообщения с видео при старте
+    # Затем отправляем приветственное сообщение
     updater.bot.send_video(
         chat_id=CHAT_ID,
         video=video_url,
-        caption=message_text,
-        parse_mode='HTML'
+        caption=message_text
     )
 
-    print("Бот запущен и отправил сообщение...")
-
+    print("Бот запущен и отправил стартовое сообщение.")
     updater.idle()
 
 if __name__ == '__main__':
